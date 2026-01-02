@@ -11,6 +11,7 @@ interface DoctorCardProps {
   image: string;
   isPremium?: boolean;
   whatsapp?: string;
+  priceRange?: string;
 }
 
 const DoctorCard = ({
@@ -23,6 +24,7 @@ const DoctorCard = ({
   image,
   isPremium = false,
   whatsapp,
+  priceRange,
 }: DoctorCardProps) => {
   const handleWhatsApp = () => {
     if (whatsapp) {
@@ -84,6 +86,11 @@ const DoctorCard = ({
           <Clock className="flex-shrink-0 w-4 h-4 text-primary" />
           <span>{schedule}</span>
         </div>
+        {isPremium && priceRange && (
+          <div className="flex items-center gap-2 text-sm font-semibold text-premium">
+            <span>💰 Consulta: {priceRange}</span>
+          </div>
+        )}
       </div>
 
       {/* Actions */}
