@@ -95,17 +95,13 @@ const DoctorCard = ({
           Ver Perfil
         </Button>
         
-        {isPremium && whatsapp ? (
+        {isPremium && whatsapp && (
           <Button 
             onClick={handleWhatsApp}
             className="flex-1 gap-2 bg-green-500 hover:bg-green-600 rounded-xl text-white"
           >
             <MessageCircle className="w-4 h-4" />
             WhatsApp
-          </Button>
-        ) : (
-          <Button className="flex-1 bg-gradient-hero hover:opacity-90 rounded-xl">
-            Agendar Cita
           </Button>
         )}
       </div>
