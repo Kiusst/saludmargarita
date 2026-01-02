@@ -44,7 +44,7 @@ const Hero = () => {
         <div className="max-w-4xl mx-auto text-center">
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-2 mb-6 rounded-full bg-primary-foreground/15 backdrop-blur-sm">
-            <span className="w-2 h-2 rounded-full bg-teal-400 animate-pulse-soft" />
+            <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse-soft" />
             <span className="text-sm font-medium text-primary-foreground">
               +200 Doctores disponibles en Margarita
             </span>
