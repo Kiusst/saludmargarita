@@ -11,6 +11,7 @@ const doctors = [
     image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=200&h=200&fit=crop&crop=face",
     isPremium: true,
     whatsapp: "584121234567",
+    priceRange: "40$ - 60$",
   },
   {
     name: "Dr. Carlos Rodríguez",
@@ -22,6 +23,7 @@ const doctors = [
     image: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=200&h=200&fit=crop&crop=face",
     isPremium: true,
     whatsapp: "584129876543",
+    priceRange: "40$ - 60$",
   },
   {
     name: "Dra. Ana Martínez",
