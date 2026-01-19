@@ -24,7 +24,7 @@ const locations = [
 
 const SearchBar = () => {
   return (
-    <section className="sticky top-0 z-40 bg-gradient-hero shadow-lg">
+    <section className="bg-gradient-hero shadow-md">
       <div className="container px-4 py-4 mx-auto">
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           {/* Left side - Badge */}
