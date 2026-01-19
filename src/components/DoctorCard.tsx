@@ -1,4 +1,4 @@
-import { MapPin, Clock, Star, MessageCircle, Crown, Phone } from "lucide-react";
+import { MapPin, Clock, Star, MessageCircle, Crown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 interface DoctorCardProps {
@@ -96,35 +96,27 @@ const DoctorCard = ({
           </div>
         </div>
 
-        {/* Actions */}
-        <div className="flex gap-3">
+      {/* Actions */}
+      <div className="flex gap-3">
+        <Button 
+          variant="outline" 
+          className={`py-3 h-auto rounded-xl border-border hover:bg-secondary font-semibold ${isPremium && whatsapp ? 'flex-1' : 'w-full'}`}
+        >
+          Ver Perfil
+        </Button>
+        
+        {isPremium && whatsapp && (
           <Button 
-            variant="outline" 
-            className="flex-1 py-3 h-auto rounded-xl border-border hover:bg-secondary font-semibold"
+            onClick={handleWhatsApp}
+            className="flex-1 gap-2 py-3 h-auto bg-green-500 hover:bg-green-600 rounded-xl text-white font-semibold"
           >
-            Ver Perfil
+            <MessageCircle className="w-4 h-4" />
+            WhatsApp
           </Button>
-          
-          {isPremium && whatsapp ? (
-            <Button 
-              onClick={handleWhatsApp}
-              className="flex-1 gap-2 py-3 h-auto bg-green-500 hover:bg-green-600 rounded-xl text-white font-semibold"
-            >
-              <MessageCircle className="w-4 h-4" />
-              WhatsApp
-            </Button>
-          ) : (
-            <Button 
-              variant="outline"
-              className="flex-1 gap-2 py-3 h-auto rounded-xl border-primary text-primary hover:bg-primary hover:text-primary-foreground font-semibold"
-            >
-              <Phone className="w-4 h-4" />
-              Contactar
-            </Button>
-          )}
-        </div>
+        )}
       </div>
     </div>
+  </div>
   );
 };
 
