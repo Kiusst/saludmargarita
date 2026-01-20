@@ -23,8 +23,8 @@ const Footer = () => {
           {/* Brand */}
           <div className="lg:col-span-1">
             <div className="flex items-center gap-2 mb-4">
-              <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-primary">
-                <Heart className="w-6 h-6 text-primary-foreground fill-primary-foreground" />
+              <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-amber-400/90">
+                <Heart className="w-6 h-6 text-primary fill-primary" />
               </div>
               <span className="text-xl font-bold">Salud Margarita</span>
             </div>
@@ -56,13 +56,21 @@ const Footer = () => {
               Enlaces Rápidos
             </h4>
             <ul className="space-y-3">
-              {["Buscar Doctores", "Blog de Salud", "Preguntas Frecuentes"].map((link) => (
-                <li key={link}>
-                  <a href="#" className="text-sm transition-colors text-primary-foreground/70 hover:text-primary-foreground">
-                    {link}
-                  </a>
-                </li>
-              ))}
+              <li>
+                <Link to="/" className="text-sm transition-colors text-primary-foreground/70 hover:text-primary-foreground">
+                  Buscar Doctores
+                </Link>
+              </li>
+              <li>
+                <Link to="/faq" className="text-sm transition-colors text-primary-foreground/70 hover:text-primary-foreground">
+                  Preguntas Frecuentes
+                </Link>
+              </li>
+              <li>
+                <Link to="/soporte" className="text-sm transition-colors text-primary-foreground/70 hover:text-primary-foreground">
+                  Soporte
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -78,14 +86,14 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <a href="#" className="text-sm transition-colors text-primary-foreground/70 hover:text-primary-foreground">
+                <Link to="/plan-premium" className="text-sm transition-colors text-primary-foreground/70 hover:text-primary-foreground">
                   Plan Premium
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="text-sm transition-colors text-primary-foreground/70 hover:text-primary-foreground">
-                  Soporte
-                </a>
+                <Link to="/soporte" className="text-sm transition-colors text-primary-foreground/70 hover:text-primary-foreground">
+                  Soporte para Doctores
+                </Link>
               </li>
             </ul>
           </div>
@@ -122,9 +130,9 @@ const Footer = () => {
               <Link to="/terminos" className="text-sm transition-colors text-primary-foreground/50 hover:text-primary-foreground">
                 Términos de Uso
               </Link>
-              <a href="#" className="text-sm transition-colors text-primary-foreground/50 hover:text-primary-foreground">
+              <Link to="/privacidad" className="text-sm transition-colors text-primary-foreground/50 hover:text-primary-foreground">
                 Política de Privacidad
-              </a>
+              </Link>
             </div>
           </div>
         </div>

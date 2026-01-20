@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { 
   Heart, 
   Stethoscope, 
@@ -6,21 +7,50 @@ import {
   Bone, 
   Apple, 
   Smile,
-  Brain
+  Brain,
+  Sparkles,
+  Users,
+  Activity,
+  Shield
 } from "lucide-react";
+import { getSpecialtyCounts } from "@/data/doctors";
 
-const specialties = [
-  { icon: Heart, name: "Cardiología", count: 18, color: "bg-red-50 text-red-500" },
-  { icon: Stethoscope, name: "Medicina General", count: 45, color: "bg-primary/10 text-primary" },
-  { icon: Baby, name: "Pediatría", count: 22, color: "bg-pink-50 text-pink-500" },
-  { icon: Eye, name: "Oftalmología", count: 12, color: "bg-blue-50 text-blue-500" },
-  { icon: Bone, name: "Traumatología", count: 15, color: "bg-orange-50 text-orange-500" },
-  { icon: Apple, name: "Nutrición", count: 20, color: "bg-green-50 text-green-500" },
-  { icon: Smile, name: "Odontología", count: 35, color: "bg-cyan-50 text-cyan-500" },
-  { icon: Brain, name: "Neurología", count: 8, color: "bg-purple-50 text-purple-500" },
+interface SpecialtiesSectionProps {
+  onSpecialtySelect?: (specialty: string) => void;
+}
+
+const allSpecialties = [
+  { icon: Heart, name: "Cardiología", color: "bg-red-50 text-red-500" },
+  { icon: Stethoscope, name: "Medicina General", color: "bg-primary/10 text-primary" },
+  { icon: Baby, name: "Pediatría", color: "bg-pink-50 text-pink-500" },
+  { icon: Eye, name: "Oftalmología", color: "bg-blue-50 text-blue-500" },
+  { icon: Bone, name: "Traumatología", color: "bg-orange-50 text-orange-500" },
+  { icon: Apple, name: "Nutrición", color: "bg-green-50 text-green-500" },
+  { icon: Smile, name: "Odontología", color: "bg-cyan-50 text-cyan-500" },
+  { icon: Brain, name: "Neurología", color: "bg-purple-50 text-purple-500" },
+  { icon: Sparkles, name: "Dermatología", color: "bg-rose-50 text-rose-500" },
+  { icon: Users, name: "Ginecología", color: "bg-fuchsia-50 text-fuchsia-500" },
+  { icon: Activity, name: "Psiquiatría", color: "bg-indigo-50 text-indigo-500" },
+  { icon: Shield, name: "Urología", color: "bg-teal-50 text-teal-500" },
 ];
 
-const SpecialtiesSection = () => {
+const SpecialtiesSection = ({ onSpecialtySelect }: SpecialtiesSectionProps) => {
+  const [showAll, setShowAll] = useState(false);
+  const counts = getSpecialtyCounts();
+  
+  const displayedSpecialties = showAll ? allSpecialties : allSpecialties.slice(0, 8);
+
+  const handleSpecialtyClick = (specialtyName: string) => {
+    if (onSpecialtySelect) {
+      onSpecialtySelect(specialtyName);
+    }
+    // Scroll to doctors section
+    const doctorsSection = document.querySelector('section.py-12');
+    if (doctorsSection) {
+      doctorsSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <section className="py-20 bg-background">
       <div className="container px-4 mx-auto">
@@ -39,11 +69,13 @@ const SpecialtiesSection = () => {
 
         {/* Specialties Grid */}
         <div className="grid grid-cols-2 gap-4 md:grid-cols-4 lg:gap-6">
-          {specialties.map((specialty) => {
+          {displayedSpecialties.map((specialty) => {
             const Icon = specialty.icon;
+            const count = counts[specialty.name] || 0;
             return (
               <button
                 key={specialty.name}
+                onClick={() => handleSpecialtyClick(specialty.name)}
                 className="group p-6 bg-card rounded-2xl shadow-soft hover:shadow-hover transition-all duration-300 hover:-translate-y-1 text-left"
               >
                 <div className={`inline-flex items-center justify-center w-14 h-14 mb-4 rounded-xl ${specialty.color} transition-transform group-hover:scale-110`}>
@@ -53,7 +85,7 @@ const SpecialtiesSection = () => {
                   {specialty.name}
                 </h3>
                 <p className="text-sm text-muted-foreground">
-                  {specialty.count} doctores
+                  {count} doctores
                 </p>
               </button>
             );
@@ -62,9 +94,17 @@ const SpecialtiesSection = () => {
 
         {/* View all button */}
         <div className="mt-10 text-center">
-          <button className="inline-flex items-center gap-2 px-6 py-3 font-medium transition-colors rounded-xl text-primary hover:bg-primary/5">
-            Ver todas las especialidades
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <button 
+            className="inline-flex items-center gap-2 px-6 py-3 font-medium transition-colors rounded-xl text-primary hover:bg-primary/5"
+            onClick={() => setShowAll(!showAll)}
+          >
+            {showAll ? "Ver menos especialidades" : "Ver todas las especialidades"}
+            <svg 
+              className={`w-4 h-4 transition-transform ${showAll ? "rotate-90" : ""}`} 
+              fill="none" 
+              viewBox="0 0 24 24" 
+              stroke="currentColor"
+            >
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
           </button>
