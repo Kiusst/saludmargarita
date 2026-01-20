@@ -1,35 +1,26 @@
 import { useState, useEffect } from "react";
-import { Heart, Stethoscope, Syringe, Activity, HelpCircle, UserPlus, Sparkles, X } from "lucide-react";
+import { Heart, Menu, X, HelpCircle, UserPlus, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
-  const [lastScrollY, setLastScrollY] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      
-      // Minimize on scroll down, expand on scroll up
-      if (currentScrollY > 50) {
-        setIsMinimized(true);
-      } else {
-        setIsMinimized(false);
-      }
-      
-      setLastScrollY(currentScrollY);
+      setIsMinimized(currentScrollY > 50);
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [lastScrollY]);
+  }, []);
 
   const menuItems = [
-    { icon: HelpCircle, label: "Centro de Ayuda", href: "#" },
+    { icon: HelpCircle, label: "Centro de Ayuda", href: "/soporte" },
     { icon: UserPlus, label: "Conviértete Miembro Especialista", href: "/registro-doctor" },
-    { icon: Sparkles, label: "Funcionalidades", href: "#" },
+    { icon: Sparkles, label: "Plan Premium", href: "/plan-premium" },
   ];
 
   return (
@@ -39,56 +30,53 @@ const Header = () => {
           isMinimized ? "py-2" : "py-4"
         }`}
       >
-        {/* Fade gradient background - wave effect */}
-        <div className="absolute inset-0 bg-gradient-to-b from-primary via-primary/90 to-primary/70" />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-transparent" />
+        {/* Gradient background - clean wave effect from dark to light */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[hsl(174,62%,25%)] via-primary to-primary/80" />
         
         <div className="container relative px-4 mx-auto">
           <nav className="flex items-center justify-between">
-            {/* Left side - Logo + Ser Miembro button */}
-            <div className="flex items-center gap-4">
-              <Link to="/" className="flex items-center gap-2">
-                <div className={`flex items-center justify-center rounded-xl bg-primary-foreground/20 backdrop-blur-sm transition-all duration-300 ${
-                  isMinimized ? "w-8 h-8" : "w-10 h-10"
-                }`}>
-                  <Heart className={`text-primary-foreground fill-primary-foreground transition-all duration-300 ${
-                    isMinimized ? "w-4 h-4" : "w-5 h-5"
-                  }`} />
-                </div>
-                <span className={`font-bold text-primary-foreground transition-all duration-300 ${
-                  isMinimized ? "text-base" : "text-lg"
-                }`}>
-                  Salud Margarita
-                </span>
-              </Link>
-              
+            {/* Left side - Logo */}
+            <Link to="/" className="flex items-center gap-2">
+              <div className={`flex items-center justify-center rounded-xl bg-amber-400/90 backdrop-blur-sm transition-all duration-300 ${
+                isMinimized ? "w-8 h-8" : "w-10 h-10"
+              }`}>
+                <Heart className={`text-primary fill-primary transition-all duration-300 ${
+                  isMinimized ? "w-4 h-4" : "w-5 h-5"
+                }`} />
+              </div>
+              <span className={`font-bold text-primary-foreground transition-all duration-300 ${
+                isMinimized ? "text-base" : "text-lg"
+              }`}>
+                Salud Margarita
+              </span>
+            </Link>
+
+            {/* Right side - Ser Miembro Button + Hamburger */}
+            <div className="flex items-center gap-3">
               {/* Ser Miembro Button - Desktop */}
               <Link to="/registro-doctor" className="hidden md:block">
                 <Button 
                   size="sm"
-                  className="gap-2 bg-accent hover:bg-accent/90 text-accent-foreground font-semibold rounded-lg"
+                  className="gap-2 bg-amber-400/90 hover:bg-amber-400 text-primary font-semibold rounded-lg"
                 >
                   <UserPlus className="w-4 h-4" />
                   Ser Miembro
                 </Button>
               </Link>
-            </div>
 
-            {/* Right side - Hamburger Menu Button */}
-            <button 
-              className="relative p-2 text-primary-foreground hover:bg-primary-foreground/10 rounded-xl transition-colors"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-            >
-              {isMenuOpen ? (
-                <X className="w-6 h-6" />
-              ) : (
-                <div className="flex items-center gap-1">
-                  <Stethoscope className="w-5 h-5" />
-                  <Syringe className="w-4 h-4 -rotate-45" />
-                  <Activity className="w-5 h-5" />
-                </div>
-              )}
-            </button>
+              {/* Simple Hamburger Menu Button */}
+              <button 
+                className="relative p-2 text-primary-foreground hover:bg-primary-foreground/10 rounded-xl transition-colors"
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                aria-label="Menú"
+              >
+                {isMenuOpen ? (
+                  <X className="w-6 h-6" />
+                ) : (
+                  <Menu className="w-6 h-6" />
+                )}
+              </button>
+            </div>
           </nav>
         </div>
       </header>
@@ -99,7 +87,7 @@ const Header = () => {
         className="fixed bottom-4 left-4 right-4 z-40 md:hidden"
       >
         <Button 
-          className="w-full gap-2 py-4 bg-accent hover:bg-accent/90 text-accent-foreground font-semibold rounded-xl shadow-lg"
+          className="w-full gap-2 py-4 bg-amber-400/90 hover:bg-amber-400 text-primary font-semibold rounded-xl shadow-lg"
         >
           <UserPlus className="w-5 h-5" />
           Ser Miembro Especialista
@@ -126,6 +114,22 @@ const Header = () => {
                   <span className="text-sm font-medium">{item.label}</span>
                 </Link>
               ))}
+              <div className="my-2 border-t border-border" />
+              <Link
+                to="/faq"
+                className="flex items-center gap-3 px-4 py-3 text-foreground hover:bg-secondary rounded-xl transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                <HelpCircle className="w-5 h-5 text-primary" />
+                <span className="text-sm font-medium">Preguntas Frecuentes</span>
+              </Link>
+              <Link
+                to="/privacidad"
+                className="flex items-center gap-3 px-4 py-3 text-foreground hover:bg-secondary rounded-xl transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                <span className="text-sm font-medium">Política de Privacidad</span>
+              </Link>
             </div>
           </div>
         </div>
