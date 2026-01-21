@@ -25,11 +25,8 @@ const Header = () => {
 
   return (
     <>
-      {/* Background blur layer - fixed behind everything */}
-      <div className="fixed top-0 left-0 right-0 h-24 z-40 pointer-events-none backdrop-blur-md bg-primary/70" />
-      
       <header 
-        className={`sticky top-0 z-50 transition-all duration-500 ${
+        className={`sticky top-0 z-50 transition-all duration-500 bg-gradient-to-r from-primary via-primary/95 to-primary/90 backdrop-blur-md shadow-md ${
           isMinimized ? "py-2" : "py-4"
         }`}
       >

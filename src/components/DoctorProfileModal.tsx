@@ -57,12 +57,12 @@ const DoctorProfileModal = ({ doctor, isOpen, onClose }: DoctorProfileModalProps
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto p-0">
-        {/* Header with image */}
-        <div className="relative h-48 overflow-hidden">
+        {/* Header with image - Centered and responsive */}
+        <div className="relative w-full aspect-[16/9] sm:aspect-[2/1] overflow-hidden">
           <img
             src={doctor.image}
             alt={doctor.name}
-            className="object-cover w-full h-full"
+            className="absolute inset-0 w-full h-full object-cover object-top"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
           
@@ -75,9 +75,9 @@ const DoctorProfileModal = ({ doctor, isOpen, onClose }: DoctorProfileModalProps
           )}
 
           {/* Doctor Info on Image */}
-          <div className="absolute bottom-4 left-6 right-6">
-            <h2 className="text-2xl font-bold text-white mb-1">{doctor.name}</h2>
-            <p className="text-lg text-white/90 font-medium">{doctor.specialty}</p>
+          <div className="absolute bottom-4 left-4 right-4 sm:left-6 sm:right-6">
+            <h2 className="text-xl sm:text-2xl font-bold text-white mb-1">{doctor.name}</h2>
+            <p className="text-base sm:text-lg text-white/90 font-medium">{doctor.specialty}</p>
           </div>
         </div>
 
