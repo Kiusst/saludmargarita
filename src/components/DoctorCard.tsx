@@ -76,12 +76,12 @@ const DoctorCard = ({
           </div>
         )}
 
-        {/* Doctor Image - Centered */}
-        <div className="relative w-full h-48 overflow-hidden">
+        {/* Doctor Image - Centered on face */}
+        <div className="relative w-full aspect-[4/3] overflow-hidden">
           <img
             src={image}
             alt={name}
-            className="object-cover object-center w-full h-full"
+            className="object-cover object-top w-full h-full"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
           
