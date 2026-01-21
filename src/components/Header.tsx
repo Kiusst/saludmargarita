@@ -25,8 +25,8 @@ const Header = () => {
 
   return (
     <>
-      {/* Background gradient layer - fixed behind everything */}
-      <div className="fixed top-0 left-0 right-0 h-32 z-40 pointer-events-none bg-gradient-to-b from-[hsl(174,62%,20%)] via-primary/90 to-transparent" />
+      {/* Background blur layer - fixed behind everything */}
+      <div className="fixed top-0 left-0 right-0 h-24 z-40 pointer-events-none backdrop-blur-md bg-primary/70" />
       
       <header 
         className={`sticky top-0 z-50 transition-all duration-500 ${
