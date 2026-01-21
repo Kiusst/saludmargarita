@@ -25,22 +25,22 @@ const Header = () => {
 
   return (
     <>
+      {/* Background gradient layer - fixed behind everything */}
+      <div className="fixed top-0 left-0 right-0 h-32 z-40 pointer-events-none bg-gradient-to-b from-[hsl(174,62%,20%)] via-primary/90 to-transparent" />
+      
       <header 
         className={`sticky top-0 z-50 transition-all duration-500 ${
           isMinimized ? "py-2" : "py-4"
         }`}
       >
-        {/* Gradient background - clean wave effect from dark to light */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[hsl(174,62%,25%)] via-primary to-primary/80" />
-        
         <div className="container relative px-4 mx-auto">
           <nav className="flex items-center justify-between">
             {/* Left side - Logo */}
             <Link to="/" className="flex items-center gap-2">
-              <div className={`flex items-center justify-center rounded-xl bg-amber-400/90 backdrop-blur-sm transition-all duration-300 ${
+              <div className={`flex items-center justify-center rounded-xl bg-orange-500 backdrop-blur-sm transition-all duration-300 ${
                 isMinimized ? "w-8 h-8" : "w-10 h-10"
               }`}>
-                <Heart className={`text-primary fill-primary transition-all duration-300 ${
+                <Heart className={`text-white fill-white transition-all duration-300 ${
                   isMinimized ? "w-4 h-4" : "w-5 h-5"
                 }`} />
               </div>
@@ -57,7 +57,7 @@ const Header = () => {
               <Link to="/registro-doctor" className="hidden md:block">
                 <Button 
                   size="sm"
-                  className="gap-2 bg-amber-400/90 hover:bg-amber-400 text-primary font-semibold rounded-lg"
+                  className="gap-2 bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-lg"
                 >
                   <UserPlus className="w-4 h-4" />
                   Ser Miembro
@@ -87,16 +87,16 @@ const Header = () => {
         className="fixed bottom-4 left-4 right-4 z-40 md:hidden"
       >
         <Button 
-          className="w-full gap-2 py-4 bg-amber-400/90 hover:bg-amber-400 text-primary font-semibold rounded-xl shadow-lg"
+          className="w-full gap-2 py-4 bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-xl shadow-lg"
         >
           <UserPlus className="w-5 h-5" />
           Ser Miembro Especialista
         </Button>
       </Link>
 
-      {/* Menu Dropdown */}
+      {/* Menu Dropdown - z-[60] ensures it overlays everything */}
       {isMenuOpen && (
-        <div className="fixed inset-0 z-40 pt-20" onClick={() => setIsMenuOpen(false)}>
+        <div className="fixed inset-0 z-[60] pt-20" onClick={() => setIsMenuOpen(false)}>
           <div className="absolute inset-0 bg-black/30 backdrop-blur-sm" />
           <div 
             className="absolute top-16 right-4 w-72 bg-card rounded-2xl shadow-2xl overflow-hidden animate-in slide-in-from-top-2 duration-200"
