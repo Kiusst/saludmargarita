@@ -23,10 +23,12 @@ const Index = () => {
     <div className="min-h-screen">
       <Header />
       <SearchBar onSearch={handleSearch} />
-      <DoctorsSection 
-        selectedSpecialty={selectedSpecialty} 
-        selectedLocation={selectedLocation} 
-      />
+      <div id="doctors-section">
+        <DoctorsSection 
+          selectedSpecialty={selectedSpecialty} 
+          selectedLocation={selectedLocation} 
+        />
+      </div>
       <SpecialtiesSection onSpecialtySelect={handleSpecialtySelect} />
       <MapSection />
       <Footer />

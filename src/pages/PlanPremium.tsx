@@ -1,7 +1,7 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { 
   Heart, 
-  ArrowLeft, 
   Check, 
   Star, 
   MessageCircle, 
@@ -15,6 +15,7 @@ import {
 import { Button } from "@/components/ui/button";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import BackButton from "@/components/BackButton";
 
 const benefits = [
   {
@@ -71,6 +72,10 @@ const testimonials = [
 ];
 
 const PlanPremium = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
@@ -78,28 +83,24 @@ const PlanPremium = () => {
       {/* Hero Section */}
       <section className="relative py-20 overflow-hidden">
         {/* Background gradient */}
-        <div className="absolute inset-0 bg-gradient-to-br from-amber-50 via-background to-primary/5" />
-        <div className="absolute top-20 right-10 w-72 h-72 bg-amber-400/20 rounded-full blur-3xl" />
+        <div className="absolute inset-0 bg-gradient-to-br from-[hsl(43,40%,95%)] via-background to-primary/5" />
+        <div className="absolute top-20 right-10 w-72 h-72 bg-[hsl(38,92%,50%)]/20 rounded-full blur-3xl" />
         <div className="absolute bottom-10 left-10 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
         
         <div className="container relative px-4 mx-auto">
-          <Link 
-            to="/" 
-            className="inline-flex items-center gap-2 mb-8 text-sm font-medium text-primary hover:text-primary/80 transition-colors"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            Volver al inicio
-          </Link>
+          <div className="mb-8">
+            <BackButton />
+          </div>
           
           <div className="max-w-4xl mx-auto text-center">
-            <div className="inline-flex items-center gap-2 px-4 py-2 mb-6 bg-amber-400/20 rounded-full">
-              <Sparkles className="w-5 h-5 text-amber-600" />
-              <span className="text-sm font-semibold text-amber-700">Membresía para Doctores</span>
+            <div className="inline-flex items-center gap-2 px-4 py-2 mb-6 bg-[hsl(38,92%,50%)]/20 rounded-full">
+              <Sparkles className="w-5 h-5 text-[hsl(32,90%,42%)]" />
+              <span className="text-sm font-semibold text-[hsl(32,90%,35%)]">Membresía para Doctores</span>
             </div>
             
             <h1 className="text-4xl font-bold text-foreground md:text-5xl lg:text-6xl mb-6">
               Destaca como{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-amber-600">
+              <span className="text-transparent bg-clip-text bg-gradient-golden">
                 Doctor Premium
               </span>
             </h1>
@@ -111,7 +112,7 @@ const PlanPremium = () => {
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link to="/registro-doctor">
-                <Button size="lg" className="gap-2 px-8 py-6 text-lg bg-amber-500 hover:bg-amber-600 text-white rounded-xl shadow-lg shadow-amber-500/25">
+                <Button size="lg" className="gap-2 px-8 py-6 text-lg bg-gradient-golden hover:opacity-90 text-white rounded-xl shadow-golden">
                   <Star className="w-5 h-5" />
                   Activar Premium
                 </Button>
@@ -146,8 +147,8 @@ const PlanPremium = () => {
                   key={index}
                   className="p-6 bg-background rounded-2xl shadow-soft hover:shadow-hover transition-all duration-300 hover:-translate-y-1"
                 >
-                  <div className="inline-flex items-center justify-center w-14 h-14 mb-4 rounded-xl bg-amber-400/20">
-                    <Icon className="w-7 h-7 text-amber-600" />
+                  <div className="inline-flex items-center justify-center w-14 h-14 mb-4 rounded-xl bg-[hsl(38,92%,50%)]/20">
+                    <Icon className="w-7 h-7 text-[hsl(32,90%,42%)]" />
                   </div>
                   <h3 className="text-lg font-bold text-foreground mb-2">{benefit.title}</h3>
                   <p className="text-muted-foreground">{benefit.description}</p>
@@ -208,51 +209,51 @@ const PlanPremium = () => {
               </div>
 
               {/* Premium Plan */}
-              <div className="relative p-8 bg-gradient-to-br from-amber-50 to-amber-100/50 rounded-2xl shadow-lg border-2 border-amber-400">
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-amber-500 text-white text-sm font-semibold rounded-full">
+              <div className="relative p-8 bg-gradient-to-br from-[hsl(43,40%,95%)] to-[hsl(38,50%,92%)] rounded-2xl shadow-lg border-2 border-[hsl(38,92%,50%)]">
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-gradient-golden text-white text-sm font-semibold rounded-full shadow-golden">
                   Más Popular
                 </div>
                 
                 <h3 className="text-xl font-bold text-foreground mb-2 flex items-center gap-2">
                   Plan Premium
-                  <Star className="w-5 h-5 text-amber-500 fill-amber-500" />
+                  <Star className="w-5 h-5 text-[hsl(38,92%,50%)] fill-[hsl(38,92%,50%)]" />
                 </h3>
                 <p className="text-muted-foreground mb-6">Para doctores que quieren crecer</p>
                 
                 <div className="text-4xl font-bold text-foreground mb-2">
                   $29 <span className="text-lg font-normal text-muted-foreground">/mes</span>
                 </div>
-                <p className="text-sm text-amber-600 mb-8">Ahorra 20% con el plan anual</p>
+                <p className="text-sm text-[hsl(32,90%,42%)] mb-8">Ahorra 20% con el plan anual</p>
 
                 <ul className="space-y-4 mb-8">
                   <li className="flex items-center gap-3 text-foreground">
-                    <Check className="w-5 h-5 text-amber-600 flex-shrink-0" />
+                    <Check className="w-5 h-5 text-[hsl(32,90%,42%)] flex-shrink-0" />
                     <strong>Todo del plan gratuito</strong>
                   </li>
                   <li className="flex items-center gap-3 text-foreground">
-                    <Check className="w-5 h-5 text-amber-600 flex-shrink-0" />
+                    <Check className="w-5 h-5 text-[hsl(32,90%,42%)] flex-shrink-0" />
                     Contacto directo por WhatsApp
                   </li>
                   <li className="flex items-center gap-3 text-foreground">
-                    <Check className="w-5 h-5 text-amber-600 flex-shrink-0" />
+                    <Check className="w-5 h-5 text-[hsl(32,90%,42%)] flex-shrink-0" />
                     Rango de precios visible
                   </li>
                   <li className="flex items-center gap-3 text-foreground">
-                    <Check className="w-5 h-5 text-amber-600 flex-shrink-0" />
+                    <Check className="w-5 h-5 text-[hsl(32,90%,42%)] flex-shrink-0" />
                     Insignia Premium distintiva
                   </li>
                   <li className="flex items-center gap-3 text-foreground">
-                    <Check className="w-5 h-5 text-amber-600 flex-shrink-0" />
+                    <Check className="w-5 h-5 text-[hsl(32,90%,42%)] flex-shrink-0" />
                     Prioridad en búsquedas
                   </li>
                   <li className="flex items-center gap-3 text-foreground">
-                    <Check className="w-5 h-5 text-amber-600 flex-shrink-0" />
+                    <Check className="w-5 h-5 text-[hsl(32,90%,42%)] flex-shrink-0" />
                     Estadísticas de visitas
                   </li>
                 </ul>
 
                 <Link to="/registro-doctor">
-                  <Button className="w-full py-6 rounded-xl bg-amber-500 hover:bg-amber-600 text-white">
+                  <Button className="w-full py-6 rounded-xl bg-gradient-golden hover:opacity-90 text-white shadow-golden">
                     Comenzar Ahora
                   </Button>
                 </Link>
@@ -293,7 +294,7 @@ const PlanPremium = () => {
                 </div>
                 <div className="flex gap-1 mb-4">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 text-amber-500 fill-amber-500" />
+                    <Star key={i} className="w-4 h-4 text-[hsl(38,92%,50%)] fill-[hsl(38,92%,50%)]" />
                   ))}
                 </div>
                 <p className="text-muted-foreground italic">"{testimonial.text}"</p>
@@ -316,7 +317,7 @@ const PlanPremium = () => {
               y conectando con más pacientes cada día.
             </p>
             <Link to="/registro-doctor">
-              <Button size="lg" className="px-10 py-6 text-lg bg-amber-400 hover:bg-amber-500 text-primary font-bold rounded-xl shadow-lg">
+              <Button size="lg" className="px-10 py-6 text-lg bg-gradient-golden hover:opacity-90 text-white font-bold rounded-xl shadow-golden">
                 Activar Premium Ahora
               </Button>
             </Link>

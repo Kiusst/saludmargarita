@@ -36,12 +36,16 @@ const DoctorCard = ({
     }
   };
 
+  const handleImageClick = () => {
+    setIsModalOpen(true);
+  };
+
   // Generate star rating - only stars, no text reviews
   const renderStars = (rating: number) => {
     return Array.from({ length: 5 }, (_, i) => (
       <Star 
         key={i} 
-        className={`w-3.5 h-3.5 ${i < Math.floor(rating) ? "fill-premium text-premium" : "text-muted-foreground/30"}`} 
+        className={`w-3.5 h-3.5 ${i < Math.floor(rating) ? "fill-[hsl(38,92%,50%)] text-[hsl(38,92%,50%)]" : "text-muted-foreground/30"}`} 
       />
     ));
   };
@@ -64,26 +68,36 @@ const DoctorCard = ({
       <div 
         className={`relative overflow-hidden bg-card rounded-2xl transition-all duration-300 hover:-translate-y-2 ${
           isPremium 
-            ? "shadow-premium border-2 border-premium/30 hover:border-premium/50" 
+            ? "shadow-premium border-2 border-[hsl(38,92%,50%)]/30 hover:border-[hsl(38,92%,50%)]/50" 
             : "shadow-card hover:shadow-hover"
         }`}
       >
         {/* Premium Badge */}
         {isPremium && (
-          <div className="absolute top-4 right-4 z-10 flex items-center gap-1.5 px-3 py-1.5 bg-gradient-premium rounded-full shadow-lg">
-            <Crown className="w-4 h-4 text-premium-foreground" />
-            <span className="text-xs font-bold text-premium-foreground">PREMIUM</span>
+          <div className="absolute top-4 right-4 z-10 flex items-center gap-1.5 px-3 py-1.5 bg-gradient-golden rounded-full shadow-golden">
+            <Crown className="w-4 h-4 text-white" />
+            <span className="text-xs font-bold text-white">PREMIUM</span>
           </div>
         )}
 
-        {/* Doctor Image - Centered on face */}
-        <div className="relative w-full aspect-[4/3] overflow-hidden">
+        {/* Doctor Image - Clickable to open modal */}
+        <div 
+          className="relative w-full aspect-[4/3] overflow-hidden cursor-pointer group"
+          onClick={handleImageClick}
+        >
           <img
             src={image}
             alt={name}
-            className="object-cover object-top w-full h-full"
+            className="object-cover object-top w-full h-full transition-transform duration-300 group-hover:scale-105"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+          
+          {/* Hover overlay */}
+          <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+            <span className="text-white text-sm font-medium bg-black/50 px-3 py-1.5 rounded-full">
+              Ver Perfil
+            </span>
+          </div>
           
           {/* Rating on image - Stars only */}
           <div className="absolute bottom-3 left-3 flex items-center gap-1 px-2.5 py-1.5 bg-black/50 backdrop-blur-sm rounded-full">
@@ -127,7 +141,7 @@ const DoctorCard = ({
           <div className="flex gap-3">
             <Button 
               variant="outline" 
-              className={`py-3 h-auto rounded-xl border-border hover:bg-secondary font-semibold ${isPremium && whatsapp ? 'flex-1' : 'w-full'}`}
+              className={`py-3 h-auto rounded-xl border-border hover:bg-blue-500 hover:text-white hover:border-blue-500 font-semibold transition-all duration-200 ${isPremium && whatsapp ? 'flex-1' : 'w-full'}`}
               onClick={() => setIsModalOpen(true)}
             >
               Ver Perfil

@@ -26,32 +26,31 @@ const SearchBar = ({ onSearch }: SearchBarProps) => {
     if (onSearch) {
       onSearch(selectedSpecialty, selectedLocation);
     }
+    // Scroll to doctors section
+    const doctorsSection = document.getElementById("doctors-section");
+    if (doctorsSection) {
+      doctorsSection.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
   };
 
   const handleSpecialtyChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value;
     setSelectedSpecialty(value);
-    if (onSearch) {
-      onSearch(value, selectedLocation);
-    }
   };
 
   const handleLocationChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value;
     setSelectedLocation(value);
-    if (onSearch) {
-      onSearch(selectedSpecialty, value);
-    }
   };
 
   return (
-    <section className={`sticky z-40 transition-all duration-300 ${
-      isMinimized ? "top-[52px]" : "top-[68px]"
-    }`}>
-      {/* Gradient background continuation */}
-      <div className="absolute inset-0 bg-gradient-to-b from-primary/80 via-primary/60 to-transparent" />
-      
-      <div className={`container relative px-4 mx-auto transition-all duration-300 ${
+    <section 
+      id="search-bar"
+      className={`sticky z-40 transition-all duration-300 bg-gradient-to-b from-primary to-primary/80 ${
+        isMinimized ? "top-[52px]" : "top-[68px]"
+      }`}
+    >
+      <div className={`container px-4 mx-auto transition-all duration-300 ${
         isMinimized ? "py-2" : "py-6"
       }`}>
         {/* Centered Search */}
@@ -59,7 +58,7 @@ const SearchBar = ({ onSearch }: SearchBarProps) => {
           <div className={`w-full transition-all duration-300 ${
             isMinimized ? "max-w-2xl" : "max-w-4xl"
           }`}>
-            <div className={`flex flex-col gap-2 md:flex-row md:items-center p-3 bg-card/95 backdrop-blur-md rounded-2xl shadow-lg border border-border/50 transition-all duration-300 ${
+            <div className={`flex flex-col gap-2 md:flex-row md:items-center p-3 bg-card/95 backdrop-blur-md rounded-2xl shadow-lg border border-border/20 transition-all duration-300 ${
               isMinimized ? "scale-95" : "scale-100"
             }`}>
               {/* Specialty Select */}

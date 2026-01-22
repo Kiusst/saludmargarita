@@ -18,9 +18,9 @@ const Header = () => {
   }, []);
 
   const menuItems = [
-    { icon: HelpCircle, label: "Centro de Ayuda", href: "/soporte" },
-    { icon: UserPlus, label: "Conviértete Miembro Especialista", href: "/registro-doctor" },
-    { icon: Sparkles, label: "Plan Premium", href: "/plan-premium" },
+    { icon: HelpCircle, label: "Centro de Ayuda", href: "/soporte", highlight: false },
+    { icon: UserPlus, label: "Conviértete Miembro Especialista", href: "/registro-doctor", highlight: false },
+    { icon: Sparkles, label: "Plan Premium", href: "/plan-premium", highlight: true },
   ];
 
   return (
@@ -34,7 +34,7 @@ const Header = () => {
           <nav className="flex items-center justify-between">
             {/* Left side - Logo */}
             <Link to="/" className="flex items-center gap-2">
-              <div className={`flex items-center justify-center rounded-xl bg-orange-500 backdrop-blur-sm transition-all duration-300 ${
+              <div className={`flex items-center justify-center rounded-xl bg-gradient-golden shadow-golden transition-all duration-300 ${
                 isMinimized ? "w-8 h-8" : "w-10 h-10"
               }`}>
                 <Heart className={`text-white fill-white transition-all duration-300 ${
@@ -54,7 +54,7 @@ const Header = () => {
               <Link to="/registro-doctor" className="hidden md:block">
                 <Button 
                   size="sm"
-                  className="gap-2 bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-lg"
+                  className="gap-2 bg-gradient-golden hover:opacity-90 text-white font-semibold rounded-lg shadow-golden transition-all duration-200"
                 >
                   <UserPlus className="w-4 h-4" />
                   Ser Miembro
@@ -84,17 +84,17 @@ const Header = () => {
         className="fixed bottom-4 left-4 right-4 z-40 md:hidden"
       >
         <Button 
-          className="w-full gap-2 py-4 bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-xl shadow-lg"
+          className="w-full gap-2 py-4 bg-gradient-golden hover:opacity-90 text-white font-semibold rounded-xl shadow-golden"
         >
           <UserPlus className="w-5 h-5" />
           Ser Miembro Especialista
         </Button>
       </Link>
 
-      {/* Menu Dropdown - z-[60] ensures it overlays everything */}
+      {/* Menu Dropdown - No blur background, just menu appears */}
       {isMenuOpen && (
         <div className="fixed inset-0 z-[60] pt-20" onClick={() => setIsMenuOpen(false)}>
-          <div className="absolute inset-0 bg-black/30 backdrop-blur-sm" />
+          <div className="absolute inset-0 bg-black/20" />
           <div 
             className="absolute top-16 right-4 w-72 bg-card rounded-2xl shadow-2xl overflow-hidden animate-in slide-in-from-top-2 duration-200"
             onClick={(e) => e.stopPropagation()}
@@ -104,11 +104,20 @@ const Header = () => {
                 <Link
                   key={index}
                   to={item.href}
-                  className="flex items-center gap-3 px-4 py-3 text-foreground hover:bg-secondary rounded-xl transition-colors"
+                  className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${
+                    item.highlight 
+                      ? "bg-gradient-to-r from-[hsl(38,92%,50%)]/10 to-[hsl(43,96%,56%)]/20 hover:from-[hsl(38,92%,50%)]/20 hover:to-[hsl(43,96%,56%)]/30 border border-[hsl(38,92%,50%)]/30" 
+                      : "text-foreground hover:bg-secondary"
+                  }`}
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  <item.icon className="w-5 h-5 text-primary" />
-                  <span className="text-sm font-medium">{item.label}</span>
+                  <item.icon className={`w-5 h-5 ${item.highlight ? "text-[hsl(38,92%,50%)]" : "text-primary"}`} />
+                  <span className={`text-sm font-medium ${item.highlight ? "text-[hsl(38,92%,50%)]" : ""}`}>
+                    {item.label}
+                  </span>
+                  {item.highlight && (
+                    <Sparkles className="w-4 h-4 text-[hsl(38,92%,50%)] ml-auto" />
+                  )}
                 </Link>
               ))}
               <div className="my-2 border-t border-border" />

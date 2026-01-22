@@ -42,17 +42,24 @@
     --teal-light: 174 45% 96%;
     --coral: 16 85% 60%;
     --coral-light: 16 85% 95%;
+    
+    /* Golden color for branding */
+    --golden: 38 92% 50%;
+    --golden-light: 43 96% 56%;
+    --golden-dark: 32 90% 42%;
 
     /* Gradients */
     --gradient-hero: linear-gradient(135deg, hsl(174 62% 40%) 0%, hsl(180 45% 50%) 50%, hsl(174 50% 45%) 100%);
-    --gradient-premium: linear-gradient(135deg, hsl(43 90% 55%) 0%, hsl(35 85% 50%) 100%);
+    --gradient-premium: linear-gradient(135deg, hsl(38 92% 50%) 0%, hsl(32 90% 42%) 100%);
+    --gradient-golden: linear-gradient(135deg, hsl(43 96% 56%) 0%, hsl(38 92% 50%) 50%, hsl(32 90% 42%) 100%);
     --gradient-card: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(180 20% 98%) 100%);
 
     /* Shadows */
     --shadow-soft: 0 4px 20px -4px hsl(200 25% 15% / 0.1);
     --shadow-card: 0 8px 30px -8px hsl(200 25% 15% / 0.12);
-    --shadow-premium: 0 8px 30px -8px hsl(43 90% 55% / 0.3);
+    --shadow-premium: 0 8px 30px -8px hsl(38 92% 50% / 0.3);
     --shadow-hover: 0 12px 40px -10px hsl(174 62% 40% / 0.25);
+    --shadow-golden: 0 8px 30px -8px hsl(38 92% 50% / 0.4);
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -96,6 +103,9 @@
     --premium: 43 85% 50%;
     --teal-light: 174 30% 15%;
     --coral-light: 16 50% 15%;
+    --golden: 38 92% 50%;
+    --golden-light: 43 96% 56%;
+    --golden-dark: 32 90% 42%;
 
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
@@ -151,6 +161,22 @@
 
   .shadow-hover {
     box-shadow: var(--shadow-hover);
+  }
+
+  .shadow-golden {
+    box-shadow: var(--shadow-golden);
+  }
+
+  .bg-golden {
+    background-color: hsl(var(--golden));
+  }
+
+  .bg-gradient-golden {
+    background-image: var(--gradient-golden);
+  }
+
+  .text-golden {
+    color: hsl(var(--golden));
   }
 
   .animate-float {

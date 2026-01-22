@@ -1,8 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { 
   Heart, 
-  ArrowLeft, 
   MessageCircle, 
   Mail, 
   Phone, 
@@ -20,6 +19,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import BackButton from "@/components/BackButton";
 import { toast } from "@/hooks/use-toast";
 
 const supportCategories = [
@@ -88,6 +88,10 @@ const Soporte = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
@@ -134,8 +138,7 @@ const Soporte = () => {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link to="/">
-                  <Button className="gap-2">
-                    <ArrowLeft className="w-4 h-4" />
+                  <Button className="gap-2 bg-primary hover:bg-primary/90">
                     Volver al Inicio
                   </Button>
                 </Link>
@@ -165,18 +168,14 @@ const Soporte = () => {
       {/* Hero Section */}
       <section className="py-16 bg-gradient-to-b from-primary/10 to-background">
         <div className="container px-4 mx-auto">
-          <Link 
-            to="/" 
-            className="inline-flex items-center gap-2 mb-8 text-sm font-medium text-primary hover:text-primary/80 transition-colors"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            Volver al inicio
-          </Link>
+          <div className="mb-8">
+            <BackButton />
+          </div>
           
           <div className="max-w-3xl">
             <div className="flex items-center gap-3 mb-4">
-              <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-amber-400/90">
-                <Heart className="w-6 h-6 text-primary fill-primary" />
+              <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-golden shadow-golden">
+                <Heart className="w-6 h-6 text-white fill-white" />
               </div>
               <h1 className="text-4xl font-bold text-foreground">Centro de Soporte</h1>
             </div>
@@ -265,7 +264,7 @@ const Soporte = () => {
               Selecciona la categoría que mejor describe tu consulta
             </p>
 
-            {/* Category Selection */}
+            {/* Category Selection - Improved buttons */}
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 mb-8">
               {supportCategories.map((category, index) => {
                 const Icon = category.icon;
@@ -276,10 +275,10 @@ const Soporte = () => {
                     key={index}
                     type="button"
                     onClick={() => setFormData(prev => ({ ...prev, category: category.title }))}
-                    className={`p-4 rounded-xl text-left transition-all ${
+                    className={`p-4 rounded-xl text-left transition-all duration-200 border-2 ${
                       isSelected 
-                        ? "bg-primary text-primary-foreground ring-2 ring-primary ring-offset-2" 
-                        : "bg-background hover:bg-secondary/50"
+                        ? "bg-primary text-primary-foreground border-primary shadow-lg scale-[1.02]" 
+                        : "bg-background border-border hover:border-primary/50 hover:bg-primary/5 hover:shadow-md"
                     }`}
                   >
                     <Icon className={`w-6 h-6 mb-2 ${isSelected ? "text-primary-foreground" : "text-primary"}`} />
