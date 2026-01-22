@@ -1,5 +1,5 @@
 import { Heart, Mail, Phone, MapPin } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 // Custom X (Twitter) Icon
 const XIcon = () => (
@@ -16,6 +16,19 @@ const InstagramIcon = () => (
 );
 
 const Footer = () => {
+  const navigate = useNavigate();
+
+  const handleBuscarDoctores = (e: React.MouseEvent) => {
+    e.preventDefault();
+    navigate("/");
+    setTimeout(() => {
+      const searchBar = document.getElementById("search-bar");
+      if (searchBar) {
+        searchBar.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }, 100);
+  };
+
   return (
     <footer className="pt-16 pb-8 bg-foreground text-primary-foreground">
       <div className="container px-4 mx-auto">
@@ -23,8 +36,8 @@ const Footer = () => {
           {/* Brand */}
           <div className="lg:col-span-1">
             <div className="flex items-center gap-2 mb-4">
-              <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-amber-400/90">
-                <Heart className="w-6 h-6 text-primary fill-primary" />
+              <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-golden shadow-golden">
+                <Heart className="w-6 h-6 text-white fill-white" />
               </div>
               <span className="text-xl font-bold">Salud Margarita</span>
             </div>
@@ -57,9 +70,13 @@ const Footer = () => {
             </h4>
             <ul className="space-y-3">
               <li>
-                <Link to="/" className="text-sm transition-colors text-primary-foreground/70 hover:text-primary-foreground">
+                <a 
+                  href="/"
+                  onClick={handleBuscarDoctores}
+                  className="text-sm transition-colors text-primary-foreground/70 hover:text-primary-foreground cursor-pointer"
+                >
                   Buscar Doctores
-                </Link>
+                </a>
               </li>
               <li>
                 <Link to="/faq" className="text-sm transition-colors text-primary-foreground/70 hover:text-primary-foreground">

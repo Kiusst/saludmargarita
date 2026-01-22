@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { Upload, CheckCircle, ArrowLeft, FileText, Camera, CreditCard, Award, Building } from "lucide-react";
+import { Upload, CheckCircle, FileText, Camera, CreditCard, Award, Building } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
+import BackButton from "@/components/BackButton";
 
 const RegistroDoctor = () => {
   const navigate = useNavigate();
@@ -23,6 +24,10 @@ const RegistroDoctor = () => {
     tituloEspecialista: null as File | null,
     constanciaTrabajo: null as File | null,
   });
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const handleFileChange = (field: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
@@ -84,9 +89,7 @@ const RegistroDoctor = () => {
       <div className="sticky top-0 z-50 bg-card/95 backdrop-blur-md border-b border-border">
         <div className="container px-4 py-4 mx-auto">
           <div className="flex items-center gap-4">
-            <Link to="/" className="p-2 hover:bg-secondary rounded-xl transition-colors">
-              <ArrowLeft className="w-5 h-5" />
-            </Link>
+            <BackButton label="Volver" showHome={false} />
             <h1 className="text-xl font-bold text-foreground">Aplicar como Doctor</h1>
           </div>
         </div>
