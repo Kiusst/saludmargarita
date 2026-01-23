@@ -1,11 +1,17 @@
 import { useState, useEffect } from "react";
 import { Heart, Menu, X, HelpCircle, UserPlus, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 
-const Header = () => {
+interface HeaderProps {
+  onLogoClick?: () => void;
+}
+
+const Header = ({ onLogoClick }: HeaderProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,6 +23,19 @@ const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const handleLogoClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    
+    // If already on home, do a full refresh
+    if (location.pathname === "/") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      onLogoClick?.(); // Reset search bar state
+    } else {
+      // Navigate to home
+      navigate("/");
+    }
+  };
+
   const menuItems = [
     { icon: HelpCircle, label: "Centro de Ayuda", href: "/soporte", highlight: false },
     { icon: UserPlus, label: "Conviértete Miembro Especialista", href: "/registro-doctor", highlight: false },
@@ -26,27 +45,31 @@ const Header = () => {
   return (
     <>
       <header 
-        className={`sticky top-0 z-50 transition-all duration-500 bg-gradient-to-r from-primary via-primary/95 to-primary/90 backdrop-blur-md shadow-md ${
-          isMinimized ? "py-2" : "py-4"
+        className={`sticky top-0 z-50 transition-all duration-300 bg-gradient-to-r from-primary via-primary/95 to-primary/90 ${
+          isMinimized ? "py-2 shadow-md" : "py-4"
         }`}
       >
         <div className="container relative px-4 mx-auto">
           <nav className="flex items-center justify-between">
-            {/* Left side - Logo */}
-            <Link to="/" className="flex items-center gap-2">
-              <div className={`flex items-center justify-center rounded-xl bg-gradient-golden shadow-golden transition-all duration-300 ${
+            {/* Left side - Logo - Clickable to Home */}
+            <a 
+              href="/" 
+              onClick={handleLogoClick}
+              className="flex items-center gap-2 cursor-pointer group"
+            >
+              <div className={`flex items-center justify-center rounded-xl bg-gradient-golden shadow-golden transition-all duration-300 group-hover:scale-105 ${
                 isMinimized ? "w-8 h-8" : "w-10 h-10"
               }`}>
                 <Heart className={`text-white fill-white transition-all duration-300 ${
                   isMinimized ? "w-4 h-4" : "w-5 h-5"
                 }`} />
               </div>
-              <span className={`font-bold text-primary-foreground transition-all duration-300 ${
+              <span className={`font-bold text-primary-foreground transition-all duration-300 group-hover:opacity-90 ${
                 isMinimized ? "text-base" : "text-lg"
               }`}>
                 Salud Margarita
               </span>
-            </Link>
+            </a>
 
             {/* Right side - Ser Miembro Button + Hamburger */}
             <div className="flex items-center gap-3">
@@ -91,7 +114,7 @@ const Header = () => {
         </Button>
       </Link>
 
-      {/* Menu Dropdown - No blur background, just menu appears */}
+      {/* Menu Dropdown - No blur background */}
       {isMenuOpen && (
         <div className="fixed inset-0 z-[60] pt-20" onClick={() => setIsMenuOpen(false)}>
           <div className="absolute inset-0 bg-black/20" />

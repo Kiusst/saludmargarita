@@ -66,7 +66,7 @@ const DoctorCard = ({
   return (
     <>
       <div 
-        className={`relative overflow-hidden bg-card rounded-2xl transition-all duration-300 hover:-translate-y-2 ${
+        className={`relative overflow-hidden bg-card rounded-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-xl ${
           isPremium 
             ? "shadow-premium border-2 border-[hsl(38,92%,50%)]/30 hover:border-[hsl(38,92%,50%)]/50" 
             : "shadow-card hover:shadow-hover"
@@ -74,8 +74,8 @@ const DoctorCard = ({
       >
         {/* Premium Badge */}
         {isPremium && (
-          <div className="absolute top-4 right-4 z-10 flex items-center gap-1.5 px-3 py-1.5 bg-gradient-golden rounded-full shadow-golden">
-            <Crown className="w-4 h-4 text-white" />
+          <div className="absolute top-3 right-3 z-10 flex items-center gap-1.5 px-2.5 py-1 bg-gradient-golden rounded-full shadow-golden">
+            <Crown className="w-3.5 h-3.5 text-white" />
             <span className="text-xs font-bold text-white">PREMIUM</span>
           </div>
         )}
@@ -114,34 +114,34 @@ const DoctorCard = ({
         </div>
 
         {/* Content */}
-        <div className="p-5">
+        <div className="p-4 sm:p-5">
           {/* Name and Specialty */}
-          <div className="mb-4">
-            <h3 className="mb-1 text-xl font-bold text-foreground">
+          <div className="mb-3">
+            <h3 className="mb-1 text-lg sm:text-xl font-bold text-foreground line-clamp-1">
               {name}
             </h3>
-            <p className="text-base font-semibold text-primary">
+            <p className="text-sm sm:text-base font-semibold text-primary">
               {specialty}
             </p>
           </div>
 
           {/* Details */}
-          <div className="space-y-2.5 mb-5">
-            <div className="flex items-center gap-2.5 text-sm text-muted-foreground">
+          <div className="space-y-2 mb-4">
+            <div className="flex items-center gap-2 text-sm text-muted-foreground">
               <MapPin className="flex-shrink-0 w-4 h-4 text-primary" />
               <span className="truncate">{location}</span>
             </div>
-            <div className="flex items-center gap-2.5 text-sm text-muted-foreground">
+            <div className="flex items-center gap-2 text-sm text-muted-foreground">
               <Clock className="flex-shrink-0 w-4 h-4 text-primary" />
-              <span>{schedule}</span>
+              <span className="truncate">{schedule}</span>
             </div>
           </div>
 
           {/* Actions */}
-          <div className="flex gap-3">
+          <div className="flex gap-2 sm:gap-3">
             <Button 
               variant="outline" 
-              className={`py-3 h-auto rounded-xl border-border hover:bg-blue-500 hover:text-white hover:border-blue-500 font-semibold transition-all duration-200 ${isPremium && whatsapp ? 'flex-1' : 'w-full'}`}
+              className={`py-2.5 sm:py-3 h-auto rounded-xl border-border hover:bg-blue-500 hover:text-white hover:border-blue-500 dark:hover:bg-blue-600 dark:hover:text-white dark:hover:border-blue-600 font-semibold transition-all duration-200 text-sm ${isPremium && whatsapp ? 'flex-1' : 'w-full'}`}
               onClick={() => setIsModalOpen(true)}
             >
               Ver Perfil
@@ -150,10 +150,11 @@ const DoctorCard = ({
             {isPremium && whatsapp && (
               <Button 
                 onClick={handleWhatsApp}
-                className="flex-1 gap-2 py-3 h-auto bg-green-500 hover:bg-green-600 rounded-xl text-white font-semibold"
+                className="flex-1 gap-1.5 sm:gap-2 py-2.5 sm:py-3 h-auto bg-green-500 hover:bg-green-600 dark:bg-green-600 dark:hover:bg-green-700 rounded-xl text-white font-semibold text-sm"
               >
                 <MessageCircle className="w-4 h-4" />
-                WhatsApp
+                <span className="hidden sm:inline">WhatsApp</span>
+                <span className="sm:hidden">Chat</span>
               </Button>
             )}
           </div>
