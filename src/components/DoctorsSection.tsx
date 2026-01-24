@@ -1,13 +1,8 @@
 import { useState } from "react";
 import DoctorCard from "./DoctorCard";
-import { Doctor, doctors as allDoctors, filterDoctors } from "@/data/doctors";
+import { doctors as allDoctors, filterDoctors } from "@/data/doctors";
 
-interface DoctorsSectionProps {
-  selectedSpecialty?: string;
-  selectedLocation?: string;
-}
-
-const DoctorsSection = ({ selectedSpecialty = "Todas las especialidades", selectedLocation = "Toda la isla" }: DoctorsSectionProps) => {
+const DoctorsSection = ({ selectedSpecialty = "Todas las especialidades", selectedLocation = "Toda la isla" }) => {
   const [showAll, setShowAll] = useState(false);
   
   const filteredDoctors = filterDoctors(selectedSpecialty, selectedLocation);
