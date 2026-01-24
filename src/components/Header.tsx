@@ -4,16 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { specialties, locations } from "@/data/doctors";
 
-interface HeaderProps {
-  onLogoClick?: () => void;
-  onSearch?: (specialty: string, location: string) => void;
-}
-
-export interface HeaderRef {
-  resetSearch: () => void;
-}
-
-const Header = forwardRef<HeaderRef, HeaderProps>(({ onLogoClick, onSearch }, ref) => {
+const Header = forwardRef(function Header({ onLogoClick, onSearch }: any, ref: any) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
   const [selectedSpecialty, setSelectedSpecialty] = useState("Todas las especialidades");
@@ -41,7 +32,7 @@ const Header = forwardRef<HeaderRef, HeaderProps>(({ onLogoClick, onSearch }, re
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const handleLogoClick = (e: React.MouseEvent) => {
+  const handleLogoClick = (e) => {
     e.preventDefault();
     
     // Reset search

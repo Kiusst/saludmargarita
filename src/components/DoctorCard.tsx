@@ -3,19 +3,6 @@ import { MapPin, Clock, Star, MessageCircle, Crown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import DoctorProfileModal from "./DoctorProfileModal";
 
-interface DoctorCardProps {
-  name: string;
-  specialty: string;
-  location: string;
-  schedule: string;
-  rating: number;
-  reviews: number;
-  image: string;
-  isPremium?: boolean;
-  whatsapp?: string;
-  priceRange?: string;
-}
-
 const DoctorCard = ({
   name,
   specialty,
@@ -25,9 +12,9 @@ const DoctorCard = ({
   reviews,
   image,
   isPremium = false,
-  whatsapp,
-  priceRange,
-}: DoctorCardProps) => {
+  whatsapp = "",
+  priceRange = "",
+}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleWhatsApp = () => {
@@ -41,7 +28,7 @@ const DoctorCard = ({
   };
 
   // Generate star rating - only stars, no text reviews
-  const renderStars = (rating: number) => {
+  const renderStars = (rating) => {
     return Array.from({ length: 5 }, (_, i) => (
       <Star 
         key={i} 

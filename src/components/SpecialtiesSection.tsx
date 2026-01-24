@@ -15,10 +15,6 @@ import {
 } from "lucide-react";
 import { getSpecialtyCounts } from "@/data/doctors";
 
-interface SpecialtiesSectionProps {
-  onSpecialtySelect?: (specialty: string) => void;
-}
-
 const allSpecialties = [
   { icon: Heart, name: "Cardiología", color: "bg-red-50 text-red-500" },
   { icon: Stethoscope, name: "Medicina General", color: "bg-primary/10 text-primary" },
@@ -34,13 +30,13 @@ const allSpecialties = [
   { icon: Shield, name: "Urología", color: "bg-teal-50 text-teal-500" },
 ];
 
-const SpecialtiesSection = ({ onSpecialtySelect }: SpecialtiesSectionProps) => {
+const SpecialtiesSection = ({ onSpecialtySelect }) => {
   const [showAll, setShowAll] = useState(false);
   const counts = getSpecialtyCounts();
   
   const displayedSpecialties = showAll ? allSpecialties : allSpecialties.slice(0, 8);
 
-  const handleSpecialtyClick = (specialtyName: string) => {
+  const handleSpecialtyClick = (specialtyName) => {
     if (onSpecialtySelect) {
       onSpecialtySelect(specialtyName);
     }

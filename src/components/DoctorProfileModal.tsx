@@ -2,31 +2,7 @@ import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { MapPin, Clock, Star, MessageCircle, Crown, Users, Award, Stethoscope, GraduationCap, X } from "lucide-react";
 
-interface Doctor {
-  name: string;
-  specialty: string;
-  location: string;
-  schedule: string;
-  rating: number;
-  reviews: number;
-  image: string;
-  isPremium?: boolean;
-  whatsapp?: string;
-  priceRange?: string;
-  description?: string;
-  specialties?: string[];
-  education?: string;
-  experience?: string;
-  raters?: { name: string; avatar: string }[];
-}
-
-interface DoctorProfileModalProps {
-  doctor: Doctor | null;
-  isOpen: boolean;
-  onClose: () => void;
-}
-
-const DoctorProfileModal = ({ doctor, isOpen, onClose }: DoctorProfileModalProps) => {
+const DoctorProfileModal = ({ doctor, isOpen, onClose }) => {
   if (!doctor) return null;
 
   const handleWhatsApp = () => {
@@ -36,7 +12,7 @@ const DoctorProfileModal = ({ doctor, isOpen, onClose }: DoctorProfileModalProps
   };
 
   // Generate star rating
-  const renderStars = (rating: number) => {
+  const renderStars = (rating) => {
     return Array.from({ length: 5 }, (_, i) => (
       <Star 
         key={i} 
